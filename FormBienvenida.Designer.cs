@@ -2,18 +2,8 @@
 {
     partial class FormBienvenida
     {
-        /// <summary>
-        /// Variable requerida por el diseñador.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Limpiar los recursos que se estén usando.
-        /// </summary>
-        /// <param name="disposing">
-        /// true si los recursos administrados deben ser eliminados;
-        /// de lo contrario, false.
-        /// </param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -29,15 +19,15 @@
         private void InitializeComponent()
         {
             panelPrincipal = new Panel();
+            lblIcono = new Label();
             label1 = new Label();
             lblSubtitulo = new Label();
-            pictureBox1 = new PictureBox();
+            lblDescripcion = new Label();
             btnIniciarSesion = new Button();
             btnCrearCuenta = new Button();
             lblPie = new Label();
 
             panelPrincipal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
 
             // 
@@ -45,16 +35,33 @@
             // 
             panelPrincipal.BackColor = Color.White;
             panelPrincipal.BorderStyle = BorderStyle.FixedSingle;
+            panelPrincipal.Controls.Add(lblIcono);
             panelPrincipal.Controls.Add(label1);
             panelPrincipal.Controls.Add(lblSubtitulo);
-            panelPrincipal.Controls.Add(pictureBox1);
+            panelPrincipal.Controls.Add(lblDescripcion);
             panelPrincipal.Controls.Add(btnIniciarSesion);
             panelPrincipal.Controls.Add(btnCrearCuenta);
             panelPrincipal.Controls.Add(lblPie);
-            panelPrincipal.Location = new Point(131, 50);
+            panelPrincipal.Location = new Point(125, 55);
             panelPrincipal.Name = "panelPrincipal";
-            panelPrincipal.Size = new Size(555, 540);
+            panelPrincipal.Size = new Size(565, 520);
             panelPrincipal.TabIndex = 0;
+
+            // 
+            // lblIcono
+            // 
+            lblIcono.AutoSize = true;
+            lblIcono.Font = new Font(
+                "Segoe UI Emoji",
+                42F,
+                FontStyle.Regular,
+                GraphicsUnit.Point
+            );
+            lblIcono.Location = new Point(230, 35);
+            lblIcono.Name = "lblIcono";
+            lblIcono.Size = new Size(101, 75);
+            lblIcono.TabIndex = 0;
+            lblIcono.Text = "🐱";
 
             // 
             // label1
@@ -62,15 +69,15 @@
             label1.AutoSize = true;
             label1.Font = new Font(
                 "Segoe UI",
-                24F,
+                25F,
                 FontStyle.Bold,
                 GraphicsUnit.Point
             );
-            label1.ForeColor = Color.FromArgb(45, 45, 45);
-            label1.Location = new Point(96, 25);
+            label1.ForeColor = Color.FromArgb(40, 40, 45);
+            label1.Location = new Point(112, 120);
             label1.Name = "label1";
-            label1.Size = new Size(363, 54);
-            label1.TabIndex = 0;
+            label1.Size = new Size(340, 57);
+            label1.TabIndex = 1;
             label1.Text = "¡Bienvenido a Mishi!";
 
             // 
@@ -79,34 +86,40 @@
             lblSubtitulo.AutoSize = true;
             lblSubtitulo.Font = new Font(
                 "Segoe UI",
-                11F,
+                13F,
+                FontStyle.Bold,
+                GraphicsUnit.Point
+            );
+            lblSubtitulo.ForeColor = Color.FromArgb(255, 105, 120);
+            lblSubtitulo.Location = new Point(208, 185);
+            lblSubtitulo.Name = "lblSubtitulo";
+            lblSubtitulo.Size = new Size(148, 30);
+            lblSubtitulo.TabIndex = 2;
+            lblSubtitulo.Text = "ADOPTA AMOR";
+
+            // 
+            // lblDescripcion
+            // 
+            lblDescripcion.Font = new Font(
+                "Segoe UI",
+                10.5F,
                 FontStyle.Regular,
                 GraphicsUnit.Point
             );
-            lblSubtitulo.ForeColor = Color.FromArgb(100, 100, 100);
-            lblSubtitulo.Location = new Point(108, 88);
-            lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(339, 25);
-            lblSubtitulo.TabIndex = 1;
-            lblSubtitulo.Text = "Encuentra un hogar para cada michi";
-
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image =
-                Properties.Resources._8a6d2295008258fa649a2a0fc843aa6f_removebg_preview;
-
-            pictureBox1.Location = new Point(140, 125);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(275, 220);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            lblDescripcion.ForeColor = Color.FromArgb(100, 100, 105);
+            lblDescripcion.Location = new Point(75, 225);
+            lblDescripcion.Name = "lblDescripcion";
+            lblDescripcion.Size = new Size(415, 70);
+            lblDescripcion.TabIndex = 3;
+            lblDescripcion.Text =
+                "Encuentra a tu nuevo compañero y dale\n" +
+                "un hogar lleno de cariño, cuidado y felicidad.";
+            lblDescripcion.TextAlign = ContentAlignment.MiddleCenter;
 
             // 
             // btnIniciarSesion
             // 
-            btnIniciarSesion.BackColor = Color.FromArgb(255, 120, 130);
+            btnIniciarSesion.BackColor = Color.FromArgb(255, 105, 120);
             btnIniciarSesion.Cursor = Cursors.Hand;
             btnIniciarSesion.FlatAppearance.BorderSize = 0;
             btnIniciarSesion.FlatStyle = FlatStyle.Flat;
@@ -117,10 +130,10 @@
                 GraphicsUnit.Point
             );
             btnIniciarSesion.ForeColor = Color.White;
-            btnIniciarSesion.Location = new Point(110, 365);
+            btnIniciarSesion.Location = new Point(100, 320);
             btnIniciarSesion.Name = "btnIniciarSesion";
-            btnIniciarSesion.Size = new Size(335, 55);
-            btnIniciarSesion.TabIndex = 3;
+            btnIniciarSesion.Size = new Size(365, 58);
+            btnIniciarSesion.TabIndex = 4;
             btnIniciarSesion.Text = "INICIAR SESIÓN";
             btnIniciarSesion.UseVisualStyleBackColor = false;
             btnIniciarSesion.Click += btnIniciarSesion_Click;
@@ -131,7 +144,7 @@
             btnCrearCuenta.BackColor = Color.White;
             btnCrearCuenta.Cursor = Cursors.Hand;
             btnCrearCuenta.FlatAppearance.BorderColor =
-                Color.FromArgb(255, 120, 130);
+                Color.FromArgb(255, 105, 120);
             btnCrearCuenta.FlatAppearance.BorderSize = 2;
             btnCrearCuenta.FlatStyle = FlatStyle.Flat;
             btnCrearCuenta.Font = new Font(
@@ -140,11 +153,11 @@
                 FontStyle.Bold,
                 GraphicsUnit.Point
             );
-            btnCrearCuenta.ForeColor = Color.FromArgb(255, 100, 115);
-            btnCrearCuenta.Location = new Point(110, 435);
+            btnCrearCuenta.ForeColor = Color.FromArgb(255, 105, 120);
+            btnCrearCuenta.Location = new Point(100, 395);
             btnCrearCuenta.Name = "btnCrearCuenta";
-            btnCrearCuenta.Size = new Size(335, 55);
-            btnCrearCuenta.TabIndex = 4;
+            btnCrearCuenta.Size = new Size(365, 58);
+            btnCrearCuenta.TabIndex = 5;
             btnCrearCuenta.Text = "CREAR CUENTA";
             btnCrearCuenta.UseVisualStyleBackColor = false;
             btnCrearCuenta.Click += BtnCrearCuenta_Click;
@@ -159,19 +172,19 @@
                 FontStyle.Regular,
                 GraphicsUnit.Point
             );
-            lblPie.ForeColor = Color.FromArgb(130, 130, 130);
-            lblPie.Location = new Point(166, 505);
+            lblPie.ForeColor = Color.FromArgb(145, 145, 150);
+            lblPie.Location = new Point(160, 480);
             lblPie.Name = "lblPie";
-            lblPie.Size = new Size(223, 20);
-            lblPie.TabIndex = 5;
-            lblPie.Text = "Adopta, cuida y cambia una vida";
+            lblPie.Size = new Size(245, 20);
+            lblPie.TabIndex = 6;
+            lblPie.Text = "Adopta • Cuida • Comparte • Ama";
 
             // 
             // FormBienvenida
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(235, 247, 247);
+            BackColor = Color.FromArgb(234, 247, 247);
             ClientSize = new Size(817, 640);
             Controls.Add(panelPrincipal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -182,16 +195,16 @@
 
             panelPrincipal.ResumeLayout(false);
             panelPrincipal.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panelPrincipal;
+        private Label lblIcono;
         private Label label1;
         private Label lblSubtitulo;
-        private PictureBox pictureBox1;
+        private Label lblDescripcion;
         private Button btnIniciarSesion;
         private Button btnCrearCuenta;
         private Label lblPie;

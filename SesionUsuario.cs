@@ -1,4 +1,4 @@
-namespace Mishi_App_de_adopción
+﻿namespace Mishi_App_de_adopción
 {
     public static class SesionUsuario
     {

@@ -36,7 +36,7 @@ namespace Mishi_App_de_adopción
                 return;
             }
 
-            // Validar formato básico de correo
+            // Validar correo
             if (!correo.Contains("@") || !correo.Contains("."))
             {
                 MessageBox.Show(
@@ -50,18 +50,19 @@ namespace Mishi_App_de_adopción
                 return;
             }
 
-            // Convertir la contraseña al mismo SHA-256 usado en Registro
+            // Convertir contraseña al mismo hash usado en Registro
             string contrasenaHash = HashPassword(contrasena);
 
             string query = @"
                 SELECT IdUsuario, NombreCompleto, Correo
                 FROM Usuarios
                 WHERE Correo = @Correo
-                AND Contraseña = @Contrasena";
+                AND Contraseña = @Contrasena
+                AND Activo = 1";
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+            try
             {
-                try
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
 
@@ -83,7 +84,7 @@ namespace Mishi_App_de_adopción
                         {
                             if (reader.Read())
                             {
-                                // Guardar datos del usuario conectado
+                                // Guardar sesión
                                 SesionUsuario.IdUsuario =
                                     Convert.ToInt32(reader["IdUsuario"]);
 
@@ -100,7 +101,12 @@ namespace Mishi_App_de_adopción
                                     MessageBoxIcon.Information
                                 );
 
+                                // Abrir catálogo SOLO si el login fue correcto
                                 FormCatalogo catalogo = new FormCatalogo();
+
+                                catalogo.StartPosition =
+                                    FormStartPosition.CenterScreen;
+
                                 catalogo.Show();
 
                                 this.Hide();
@@ -120,30 +126,34 @@ namespace Mishi_App_de_adopción
                         }
                     }
                 }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show(
-                        "Error de SQL Server:\n\n" + ex.Message,
-                        "Error de base de datos",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        "Error al iniciar sesión:\n\n" + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "No se pudo conectar con SQL Server.\n\n" +
+                    ex.Message,
+                    "Error de base de datos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Ocurrió un error al iniciar sesión.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
             FormRegistro registro = new FormRegistro();
+
+            registro.StartPosition = FormStartPosition.CenterScreen;
             registro.Show();
 
             this.Hide();
@@ -152,12 +162,16 @@ namespace Mishi_App_de_adopción
         private void BtnVolver_Click(object sender, EventArgs e)
         {
             FormBienvenida bienvenida = new FormBienvenida();
+
+            bienvenida.StartPosition = FormStartPosition.CenterScreen;
             bienvenida.Show();
 
             this.Hide();
         }
 
-        private void chkMostrarContrasena_CheckedChanged(object sender, EventArgs e)
+        private void chkMostrarContrasena_CheckedChanged(
+            object sender,
+            EventArgs e)
         {
             txtContrasena.UseSystemPasswordChar =
                 !chkMostrarContrasena.Checked;
@@ -170,6 +184,11 @@ namespace Mishi_App_de_adopción
 
         private static string HashPassword(string password)
         {
+            if (string.IsNullOrEmpty(password))
+            {
+                return string.Empty;
+            }
+
             using (SHA256 sha = SHA256.Create())
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(password);

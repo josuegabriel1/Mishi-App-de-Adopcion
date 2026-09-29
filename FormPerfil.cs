@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -17,37 +17,44 @@ namespace Mishi_App_de_adopción
 
         private void FormPerfil_Load(object sender, EventArgs e)
         {
-            txtNombreCompletoPerfil.Text =
-                SesionUsuario.NombreCompleto;
-
-            txtCorreoPerfil.Text =
-                SesionUsuario.Correo;
+            txtNombreCompletoPerfil.Text = SesionUsuario.NombreCompleto;
+            txtCorreoPerfil.Text = SesionUsuario.Correo;
         }
 
         private void btnGuardarPerfil_Click(object sender, EventArgs e)
         {
-            string nuevoNombre =
-                txtNombreCompletoPerfil.Text.Trim();
-
-            string nuevoCorreo =
-                txtCorreoPerfil.Text.Trim();
+            string nuevoNombre = txtNombreCompletoPerfil.Text.Trim();
+            string nuevoCorreo = txtCorreoPerfil.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(nuevoNombre) ||
                 string.IsNullOrWhiteSpace(nuevoCorreo))
             {
                 MessageBox.Show(
-                    "Completa todos los campos.",
+                    "Por favor, completa todos los campos.",
                     "Campos requeridos",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
+
+                return;
+            }
+
+            if (!nuevoCorreo.Contains("@") || !nuevoCorreo.Contains("."))
+            {
+                MessageBox.Show(
+                    "Ingresa un correo electrónico válido.",
+                    "Correo inválido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtCorreoPerfil.Focus();
                 return;
             }
 
             try
             {
-                using (SqlConnection con =
-                    new SqlConnection(connectionString))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
 
@@ -57,8 +64,7 @@ namespace Mishi_App_de_adopción
                             Correo = @Correo
                         WHERE IdUsuario = @Id";
 
-                    using (SqlCommand cmd =
-                        new SqlCommand(query, con))
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.Add(
                             "@Nombre",
@@ -81,11 +87,8 @@ namespace Mishi_App_de_adopción
 
                         if (filas > 0)
                         {
-                            SesionUsuario.NombreCompleto =
-                                nuevoNombre;
-
-                            SesionUsuario.Correo =
-                                nuevoCorreo;
+                            SesionUsuario.NombreCompleto = nuevoNombre;
+                            SesionUsuario.Correo = nuevoCorreo;
 
                             MessageBox.Show(
                                 "Perfil actualizado correctamente.",
@@ -94,8 +97,26 @@ namespace Mishi_App_de_adopción
                                 MessageBoxIcon.Information
                             );
                         }
+                        else
+                        {
+                            MessageBox.Show(
+                                "No se encontró el usuario para actualizar.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            );
+                        }
                     }
                 }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Error de SQL Server:\n\n" + ex.Message,
+                    "Error de base de datos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
             catch (Exception ex)
             {

@@ -9,7 +9,7 @@ namespace Mishi_App_de_adopción
 {
     public partial class FormRegistro : Form
     {
-        private string connectionString =
+        private readonly string connectionString =
             @"Server=.;Database=MishiDB;Integrated Security=True;TrustServerCertificate=True;";
 
         public FormRegistro()
@@ -19,11 +19,12 @@ namespace Mishi_App_de_adopción
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombreCompleto.Text.Trim();
+            string nombreUsuario = txtNombreCompleto.Text.Trim();
             string correo = txtCorreo.Text.Trim();
             string contrasena = txtContrasena.Text;
 
-            if (string.IsNullOrWhiteSpace(nombre) ||
+            // Validar campos vacíos
+            if (string.IsNullOrWhiteSpace(nombreUsuario) ||
                 string.IsNullOrWhiteSpace(correo) ||
                 string.IsNullOrWhiteSpace(contrasena))
             {
@@ -33,9 +34,11 @@ namespace Mishi_App_de_adopción
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
+
                 return;
             }
 
+            // Validar correo
             if (!correo.Contains("@") || !correo.Contains("."))
             {
                 MessageBox.Show(
@@ -49,6 +52,7 @@ namespace Mishi_App_de_adopción
                 return;
             }
 
+            // Validar contraseña
             if (contrasena.Length < 6)
             {
                 MessageBox.Show(
@@ -64,44 +68,47 @@ namespace Mishi_App_de_adopción
 
             string contrasenaHash = HashPassword(contrasena);
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+            try
             {
-                try
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
 
+                    // Verificar si el correo ya existe
                     string checkQuery =
-                        "SELECT COUNT(1) FROM Usuarios WHERE Correo = @correo";
+                        "SELECT COUNT(*) FROM Usuarios WHERE Correo = @Correo";
 
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
                     {
                         checkCmd.Parameters.Add(
-                            "@correo",
+                            "@Correo",
                             SqlDbType.NVarChar,
                             256
                         ).Value = correo;
 
-                        int existe = Convert.ToInt32(checkCmd.ExecuteScalar());
+                        int existe =
+                            Convert.ToInt32(checkCmd.ExecuteScalar());
 
                         if (existe > 0)
                         {
                             MessageBox.Show(
-                                "Este correo electrónico ya está registrado.",
+                                "Este correo ya tiene una cuenta.\n\nTe llevaré al inicio de sesión.",
                                 "Cuenta existente",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information
                             );
 
-                            txtCorreo.Focus();
+                            AbrirLogin();
                             return;
                         }
                     }
 
+                    // Crear el usuario
                     string query = @"
                         INSERT INTO Usuarios
                         (NombreCompleto, Correo, Contraseña)
                         VALUES
-                        (@Nombre, @Correo, @Contraseña)";
+                        (@Nombre, @Correo, @Contrasena)";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
@@ -109,7 +116,7 @@ namespace Mishi_App_de_adopción
                             "@Nombre",
                             SqlDbType.NVarChar,
                             100
-                        ).Value = nombre;
+                        ).Value = nombreUsuario;
 
                         cmd.Parameters.Add(
                             "@Correo",
@@ -118,55 +125,85 @@ namespace Mishi_App_de_adopción
                         ).Value = correo;
 
                         cmd.Parameters.Add(
-                            "@Contraseña",
+                            "@Contrasena",
                             SqlDbType.NVarChar,
                             256
                         ).Value = contrasenaHash;
 
-                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        int filas = cmd.ExecuteNonQuery();
 
-                        if (filasAfectadas > 0)
+                        if (filas > 0)
                         {
                             MessageBox.Show(
-                                "¡Cuenta creada correctamente!\n\nAhora puedes iniciar sesión.",
+                                "¡Cuenta creada correctamente!\n\nAhora inicia sesión.",
                                 "Bienvenido a Mishi",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information
                             );
 
-                            FormLogin login = new FormLogin();
-                            login.Show();
-                            this.Hide();
+                            AbrirLogin();
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "No se pudo crear la cuenta.",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error
+                            );
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        "Error al registrar el usuario:\n\n" + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                }
             }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Error de SQL Server:\n\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error:\n\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        // Abrir Login sin cerrar toda la aplicación
+        private void AbrirLogin()
+        {
+            FormLogin login = new FormLogin();
+
+            login.StartPosition = FormStartPosition.CenterScreen;
+            login.Show();
+
+            this.Hide();
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            FormLogin login = new FormLogin();
-            login.Show();
-            this.Hide();
+            AbrirLogin();
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             FormBienvenida bienvenida = new FormBienvenida();
+
+            bienvenida.StartPosition = FormStartPosition.CenterScreen;
             bienvenida.Show();
+
             this.Hide();
         }
 
-        private void chkMostrarContrasena_CheckedChanged(object sender, EventArgs e)
+        private void chkMostrarContrasena_CheckedChanged(
+            object sender,
+            EventArgs e)
         {
             txtContrasena.UseSystemPasswordChar =
                 !chkMostrarContrasena.Checked;
@@ -179,6 +216,11 @@ namespace Mishi_App_de_adopción
 
         private static string HashPassword(string password)
         {
+            if (string.IsNullOrEmpty(password))
+            {
+                return string.Empty;
+            }
+
             using (SHA256 sha = SHA256.Create())
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(password);

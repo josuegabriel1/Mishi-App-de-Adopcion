@@ -18,192 +18,257 @@
 
         private void InitializeComponent()
         {
-            btnIngresar = new Button();
             label1 = new Label();
-            btnRegistro = new Button();
             label2 = new Label();
             label3 = new Label();
+
             txtCorreo = new TextBox();
             txtContrasena = new TextBox();
-            btnvolver = new Button();
-            lblSubtitulo = new Label();
+
             chkMostrarContrasena = new CheckBox();
+
+            btnIngresar = new Button();
+            btnRegistro = new Button();
+            btnvolver = new Button();
+
             SuspendLayout();
 
-            // 
+            //
             // label1
-            // 
+            //
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
-            label1.ForeColor = Color.FromArgb(45, 45, 45);
-            label1.Location = new Point(235, 75);
+            label1.Font = new Font(
+                "Segoe UI",
+                24F,
+                FontStyle.Bold
+            );
+            label1.ForeColor = Color.FromArgb(40, 40, 45);
+            label1.Location = new Point(285, 80);
             label1.Name = "label1";
-            label1.Size = new Size(377, 54);
-            label1.TabIndex = 0;
-            label1.Text = "Bienvenido a Mishi";
+            label1.Size = new Size(276, 54);
+            label1.Text = "Iniciar sesión";
 
-            // 
-            // lblSubtitulo
-            // 
-            lblSubtitulo.AutoSize = true;
-            lblSubtitulo.Font = new Font("Segoe UI", 11F);
-            lblSubtitulo.ForeColor = Color.FromArgb(100, 100, 100);
-            lblSubtitulo.Location = new Point(300, 140);
-            lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(244, 25);
-            lblSubtitulo.TabIndex = 1;
-            lblSubtitulo.Text = "Inicia sesión para continuar";
-
-            // 
+            //
             // label2
-            // 
+            //
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label2.ForeColor = Color.FromArgb(60, 60, 60);
-            label2.Location = new Point(245, 215);
+            label2.Font = new Font(
+                "Segoe UI",
+                10F,
+                FontStyle.Bold
+            );
+            label2.ForeColor = Color.FromArgb(55, 55, 60);
+            label2.Location = new Point(245, 180);
             label2.Name = "label2";
-            label2.Size = new Size(167, 23);
-            label2.TabIndex = 2;
-            label2.Text = "Correo o usuario";
+            label2.Size = new Size(163, 23);
+            label2.Text = "Correo electrónico";
 
-            // 
+            //
             // txtCorreo
-            // 
-            txtCorreo.Font = new Font("Segoe UI", 11F);
-            txtCorreo.Location = new Point(245, 247);
+            //
+            txtCorreo.Font = new Font(
+                "Segoe UI",
+                11F
+            );
+            txtCorreo.Location = new Point(245, 210);
             txtCorreo.Name = "txtCorreo";
-            txtCorreo.PlaceholderText = "Ingresa tu correo o usuario";
+            txtCorreo.PlaceholderText = "ejemplo@correo.com";
             txtCorreo.Size = new Size(355, 32);
             txtCorreo.TabIndex = 0;
 
-            // 
+            //
             // label3
-            // 
+            //
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.ForeColor = Color.FromArgb(60, 60, 60);
-            label3.Location = new Point(245, 310);
+            label3.Font = new Font(
+                "Segoe UI",
+                10F,
+                FontStyle.Bold
+            );
+            label3.ForeColor = Color.FromArgb(55, 55, 60);
+            label3.Location = new Point(245, 270);
             label3.Name = "label3";
             label3.Size = new Size(101, 23);
-            label3.TabIndex = 3;
             label3.Text = "Contraseña";
 
-            // 
+            //
             // txtContrasena
-            // 
-            txtContrasena.Font = new Font("Segoe UI", 11F);
-            txtContrasena.Location = new Point(245, 342);
+            //
+            txtContrasena.Font = new Font(
+                "Segoe UI",
+                11F
+            );
+            txtContrasena.Location = new Point(245, 300);
             txtContrasena.Name = "txtContrasena";
-            txtContrasena.PlaceholderText = "Ingresa tu contraseña";
+            txtContrasena.PlaceholderText =
+                "Escribe tu contraseña";
             txtContrasena.Size = new Size(355, 32);
             txtContrasena.TabIndex = 1;
             txtContrasena.UseSystemPasswordChar = true;
 
-            // 
+            //
             // chkMostrarContrasena
-            // 
+            //
             chkMostrarContrasena.AutoSize = true;
-            chkMostrarContrasena.Font = new Font("Segoe UI", 9F);
-            chkMostrarContrasena.ForeColor = Color.FromArgb(80, 80, 80);
-            chkMostrarContrasena.Location = new Point(245, 390);
-            chkMostrarContrasena.Name = "chkMostrarContrasena";
-            chkMostrarContrasena.Size = new Size(170, 24);
+            chkMostrarContrasena.Font = new Font(
+                "Segoe UI",
+                9F
+            );
+            chkMostrarContrasena.ForeColor =
+                Color.FromArgb(90, 90, 95);
+            chkMostrarContrasena.Location =
+                new Point(245, 345);
+            chkMostrarContrasena.Name =
+                "chkMostrarContrasena";
+            chkMostrarContrasena.Size =
+                new Size(170, 24);
             chkMostrarContrasena.TabIndex = 2;
-            chkMostrarContrasena.Text = "Mostrar contraseña";
-            chkMostrarContrasena.UseVisualStyleBackColor = true;
-            chkMostrarContrasena.CheckedChanged += chkMostrarContrasena_CheckedChanged;
+            chkMostrarContrasena.Text =
+                "Mostrar contraseña";
+            chkMostrarContrasena.UseVisualStyleBackColor =
+                true;
 
-            // 
+            chkMostrarContrasena.CheckedChanged +=
+                chkMostrarContrasena_CheckedChanged;
+
+            //
             // btnIngresar
-            // 
-            btnIngresar.BackColor = Color.FromArgb(255, 120, 130);
+            //
+            btnIngresar.BackColor =
+                Color.FromArgb(255, 105, 120);
             btnIngresar.Cursor = Cursors.Hand;
             btnIngresar.FlatAppearance.BorderSize = 0;
             btnIngresar.FlatStyle = FlatStyle.Flat;
-            btnIngresar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnIngresar.Font = new Font(
+                "Segoe UI",
+                11F,
+                FontStyle.Bold
+            );
             btnIngresar.ForeColor = Color.White;
-            btnIngresar.Location = new Point(245, 445);
+            btnIngresar.Location =
+                new Point(245, 400);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(355, 55);
+            btnIngresar.Size =
+                new Size(355, 55);
             btnIngresar.TabIndex = 3;
             btnIngresar.Text = "INICIAR SESIÓN";
             btnIngresar.UseVisualStyleBackColor = false;
-            btnIngresar.Click += BtnIngresar_Click;
 
-            // 
+            btnIngresar.Click +=
+                BtnIngresar_Click;
+
+            //
             // btnRegistro
-            // 
+            //
             btnRegistro.BackColor = Color.White;
             btnRegistro.Cursor = Cursors.Hand;
-            btnRegistro.FlatAppearance.BorderColor = Color.FromArgb(255, 120, 130);
+            btnRegistro.FlatAppearance.BorderColor =
+                Color.FromArgb(255, 105, 120);
             btnRegistro.FlatAppearance.BorderSize = 2;
             btnRegistro.FlatStyle = FlatStyle.Flat;
-            btnRegistro.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnRegistro.ForeColor = Color.FromArgb(255, 100, 115);
-            btnRegistro.Location = new Point(245, 520);
+            btnRegistro.Font = new Font(
+                "Segoe UI",
+                10F,
+                FontStyle.Bold
+            );
+            btnRegistro.ForeColor =
+                Color.FromArgb(255, 105, 120);
+            btnRegistro.Location =
+                new Point(245, 485);
             btnRegistro.Name = "btnRegistro";
-            btnRegistro.Size = new Size(355, 50);
+            btnRegistro.Size =
+                new Size(355, 50);
             btnRegistro.TabIndex = 4;
-            btnRegistro.Text = "CREAR UNA CUENTA";
+            btnRegistro.Text =
+                "CREAR UNA CUENTA";
             btnRegistro.UseVisualStyleBackColor = false;
-            btnRegistro.Click += BtnRegistro_Click;
 
-            // 
+            btnRegistro.Click +=
+                BtnRegistro_Click;
+
+            //
             // btnvolver
-            // 
+            //
             btnvolver.BackColor = Color.Transparent;
             btnvolver.Cursor = Cursors.Hand;
             btnvolver.FlatAppearance.BorderSize = 0;
             btnvolver.FlatStyle = FlatStyle.Flat;
-            btnvolver.Font = new Font("Segoe UI", 10F);
-            btnvolver.ForeColor = Color.FromArgb(90, 90, 90);
-            btnvolver.Location = new Point(335, 600);
+            btnvolver.Font = new Font(
+                "Segoe UI",
+                10F
+            );
+            btnvolver.ForeColor =
+                Color.FromArgb(80, 80, 85);
+            btnvolver.Location =
+                new Point(335, 565);
             btnvolver.Name = "btnvolver";
-            btnvolver.Size = new Size(175, 45);
+            btnvolver.Size =
+                new Size(175, 45);
             btnvolver.TabIndex = 5;
             btnvolver.Text = "← Volver";
             btnvolver.UseVisualStyleBackColor = false;
-            btnvolver.Click += BtnVolver_Click;
 
-            // 
+            btnvolver.Click +=
+                BtnVolver_Click;
+
+            //
             // FormLogin
-            // 
+            //
             AcceptButton = btnIngresar;
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(250, 248, 245);
-            ClientSize = new Size(846, 733);
-            Controls.Add(chkMostrarContrasena);
-            Controls.Add(lblSubtitulo);
-            Controls.Add(btnvolver);
-            Controls.Add(txtContrasena);
+
+            AutoScaleDimensions =
+                new SizeF(8F, 20F);
+
+            AutoScaleMode =
+                AutoScaleMode.Font;
+
+            BackColor =
+                Color.FromArgb(234, 247, 247);
+
+            ClientSize =
+                new Size(846, 680);
+
+            Controls.Add(label1);
+            Controls.Add(label2);
             Controls.Add(txtCorreo);
             Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(btnRegistro);
-            Controls.Add(label1);
+            Controls.Add(txtContrasena);
+            Controls.Add(chkMostrarContrasena);
             Controls.Add(btnIngresar);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Controls.Add(btnRegistro);
+            Controls.Add(btnvolver);
+
+            FormBorderStyle =
+                FormBorderStyle.FixedSingle;
+
             MaximizeBox = false;
+
             Name = "FormLogin";
-            StartPosition = FormStartPosition.CenterScreen;
+
+            StartPosition =
+                FormStartPosition.CenterScreen;
+
             Text = "Mishi - Iniciar sesión";
+
             Load += FormLogin_Load;
+
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button btnIngresar;
         private Label label1;
-        private Button btnRegistro;
         private Label label2;
         private Label label3;
+
         private TextBox txtCorreo;
         private TextBox txtContrasena;
-        private Button btnvolver;
-        private Label lblSubtitulo;
+
         private CheckBox chkMostrarContrasena;
+
+        private Button btnIngresar;
+        private Button btnRegistro;
+        private Button btnvolver;
     }
 }

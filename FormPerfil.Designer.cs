@@ -105,7 +105,6 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources._8a6d2295008258fa649a2a0fc843aa6f_removebg_preview;
             ClientSize = new Size(827, 644);
             Controls.Add(btnVolver);
             Controls.Add(btnGuardarPerfil);

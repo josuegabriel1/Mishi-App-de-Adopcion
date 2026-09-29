@@ -12,7 +12,7 @@ namespace Mishi_App_de_adopción
 
         private void BtnCrearCuenta_Click(object sender, EventArgs e)
         {
-            FormRegistro registro = new FormRegistro();
+            FormRegistro registro = new();
             registro.Show();
             this.Hide();
         }
@@ -23,5 +23,7 @@ namespace Mishi_App_de_adopción
             login.Show();
             this.Hide();
         }
+    
     }
 }
+ 
